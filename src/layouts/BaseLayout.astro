@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Notes on ideas, projects, and things worth keeping.',
+} = Astro.props;
+const pageTitle = title ? `${title} · Johnny Chen` : 'Johnny Chen';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f2eb" />
+    <title>{pageTitle}</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Johnny Chen" href="/feed.xml" />
+    <link rel="canonical" href={canonicalUrl} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Johnny Chen home">
+          <span class="brand-mark" aria-hidden="true">JC</span>
+          <span class="brand-name">Johnny Chen<span class="brand-period">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>Writing</a>
+          <a href="/archive/" aria-current={currentPath.startsWith('/archive') ? 'page' : undefined}>Archive</a>
+          <a href="/about/" aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>About</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <p>Made slowly, by Johnny Chen.</p>
+        <div class="footer-links">
+          <a href="https://github.com/johnnyhchen">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="/feed.xml">RSS <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="copyright">© {new Date().getFullYear()} Johnny Chen</p>
+      </footer>
+    </div>
+  </body>
+</html>

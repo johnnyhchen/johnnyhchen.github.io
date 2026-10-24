@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatPostDate, getPublishedPosts, postPath } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+---
+<BaseLayout title="Archive" description="An archive of Johnny Chen's writing.">
+  <section class="archive-page">
+    <header class="simple-page-header">
+      <p class="eyebrow">THE WHOLE NOTEBOOK</p>
+      <h1>Archive<span class="heading-period">.</span></h1>
+      <p class="page-deck">Every note, in one place.</p>
+    </header>
+    {posts.length > 0 ? (
+      <div class="archive-list">
+        {posts.map((post) => (
+          <article class="archive-row">
+            <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
+            <a href={postPath(post)}>{post.data.title} <span aria-hidden="true">↗</span></a>
+            <span class="post-category">{post.data.tags[0] ?? 'Notes'}</span>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No notes yet. Check back soon.</p>
+    )}
+  </section>
+</BaseLayout>
