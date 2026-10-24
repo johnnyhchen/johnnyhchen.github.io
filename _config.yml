@@ -1,1 +1,19 @@
-remote_theme: "jekyll/minima@1e8a445"
+title: Johnny Chen
+description: Notes on ideas, projects, and things worth keeping.
+url: "https://johnnyhchen.github.io"
+baseurl: ""
+lang: en
+timezone: America/Los_Angeles
+markdown: kramdown
+permalink: /writing/:year/:month/:day/:title/
+show_excerpts: true
+
+author:
+  name: Johnny Chen
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

@@ -1,0 +1,26 @@
+---
+layout: default
+title: Archive
+description: An archive of Johnny Chen's writing.
+permalink: /archive/
+---
+<section class="archive-page">
+  <header class="simple-page-header">
+    <p class="eyebrow">THE WHOLE NOTEBOOK</p>
+    <h1>Archive<span class="heading-period">.</span></h1>
+    <p class="page-deck">Every note, in one place.</p>
+  </header>
+  {% if site.posts.size > 0 %}
+  <div class="archive-list">
+    {% for post in site.posts %}
+    <article class="archive-row">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a>
+      <span class="post-category">{% if post.tags %}{{ post.tags | first }}{% else %}Notes{% endif %}</span>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-state">No notes yet. Check back soon.</p>
+  {% endif %}
+</section>

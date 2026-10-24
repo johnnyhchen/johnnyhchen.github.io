@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<article class="post-page">
+  <header class="post-header">
+    <a class="back-link" href="{{ '/' | relative_url }}">← All writing</a>
+    <p class="eyebrow">{% if page.tags %}{{ page.tags | first }}{% else %}Writing{% endif %}<span class="eyebrow-dot"> / </span>{{ page.date | date: '%B %-d, %Y' }}</p>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="post-deck">{{ page.description | escape }}</p>{% endif %}
+  </header>
+  <div class="prose">
+    {{ content }}
+  </div>
+  <div class="post-endmark" aria-hidden="true">✳</div>
+  <nav class="post-next" aria-label="More writing">
+    <a href="{{ '/archive/' | relative_url }}">Find another note <span aria-hidden="true">→</span></a>
+  </nav>
+</article>

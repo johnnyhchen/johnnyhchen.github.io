@@ -1,1 +1,65 @@
-Hello World
+---
+layout: default
+title: Home
+description: Johnny Chen's personal blog — notes on ideas, projects, and things worth keeping.
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PERSONAL NOTEBOOK</p>
+    <h1 id="hero-title">A place for<br><span>good thoughts.</span></h1>
+    <p class="hero-intro">Notes on ideas, projects, and things worth keeping. Written as I go, with room to change my mind.</p>
+    <a class="text-link" href="#recent">Read the latest <span aria-hidden="true">↓</span></a>
+  </div>
+  <aside class="hero-note" aria-label="A note about this site">
+    <div class="note-topline"><span>FIELD NOTES</span><span>NO. 01</span></div>
+    <div class="note-symbol" aria-hidden="true">✳</div>
+    <p>A small corner of the internet for ideas still taking shape.</p>
+    <span class="note-rule" aria-hidden="true"></span>
+    <span class="note-signoff">OPEN NOTEBOOK&nbsp; ↗</span>
+  </aside>
+</section>
+
+<section class="writing-section" id="recent" aria-labelledby="recent-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">THE NOTEBOOK</p>
+      <h2 id="recent-title">Recent writing<span class="heading-period">.</span></h2>
+    </div>
+    <a class="text-link archive-link" href="{{ '/archive/' | relative_url }}">View the archive <span aria-hidden="true">↗</span></a>
+  </div>
+
+  {% if site.posts.size > 0 %}
+  <div class="post-list">
+    {% for post in site.posts %}
+    <article class="post-card{% if forloop.first %} post-card-featured{% endif %}">
+      <a class="post-card-link" href="{{ post.url | relative_url }}">
+        <div class="post-card-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time>
+          <span class="post-category">{% if post.tags %}{{ post.tags | first }}{% else %}Notes{% endif %}</span>
+        </div>
+        <div class="post-card-copy">
+          <h3>{{ post.title | escape }}</h3>
+          {% if post.description %}<p>{{ post.description | escape }}</p>{% elsif post.excerpt %}<p>{{ post.excerpt | strip_html | normalize_whitespace | truncate: 155 | escape }}</p>{% endif %}
+        </div>
+        <span class="post-arrow" aria-hidden="true">↗</span>
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <span class="empty-mark" aria-hidden="true">✳</span>
+    <p>The first note is on its way.</p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="about-teaser" aria-labelledby="about-title">
+  <div class="about-stamp" aria-hidden="true"><span>HELLO</span><strong>JC</strong><span>THERE</span></div>
+  <div>
+    <p class="eyebrow">A LITTLE CONTEXT</p>
+    <h2 id="about-title">The person behind the notes.</h2>
+    <p>This is Johnny's personal corner of the web: a place for ideas, experiments, and the occasional change of direction.</p>
+    <a class="text-link" href="{{ '/about/' | relative_url }}">A little more about me <span aria-hidden="true">→</span></a>
+  </div>
+</section>
